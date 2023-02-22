@@ -1,42 +1,39 @@
-﻿using System.Data;
-
-namespace HelloWorld
+﻿namespace HelloWorld
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Input value");
-            var value = Console.ReadLine();
-
-            if (value != null)
+            int counter = 0;
+            foreach (string line in System.IO.File.ReadLines(@"./question.txt"))
             {
-                Console.WriteLine(" this is something " + Calculate(value));
+                Console.WriteLine($"Question: {line}");
+                Console.WriteLine();
+                Console.WriteLine($"Answer: {Calculate(line)}");
+                Console.WriteLine();
+                counter++;
             }
-            else
-            {
-                Console.WriteLine("value cannot be empty");
-            }
-
         }
 
         private static double Calculate(string n)
         {
-
             var ary = n.ToCharArray();
-
+            var combine = "";
             for (var i = 0; i <= ary.Length - 1; i++)
             {
                 var charAry = ary[i];
-                if (char.IsWhiteSpace(charAry) != true){
-                    Console.Write(charAry);
+                //ignore whitespace
+                if (char.IsWhiteSpace(charAry) != true)
+                {
+                    combine += charAry;
                 }
 
             }
-
+            Console.WriteLine(combine);
 
             return 0;
         }
+
 
         private static bool IsOperator(char c)
         {
